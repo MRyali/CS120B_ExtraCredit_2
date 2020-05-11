@@ -62,8 +62,8 @@ test "PINA: 0x00 => PORTB: 0x02, state: Alarm"
 set state = Wait
 timeContinue 42
 setPINA 0x00
-expectPORTB 0x02
-expect state Alarm
+expectPORTB 0x04
+expect state Released
 checkResult
 
 # Test 5
@@ -71,26 +71,26 @@ test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
 set state = Alarm
 timeContinue 10
 setPINA 0x02
-expectPORTB 0x05
-expect state Stop
+expectPORTB 0x02
+expect state Alarm
 checkResult
 
 # Test 6
 test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
 set state = Wait
-timeContinue 10
 setPINA 0x02
-expectPORTB 0x05
-expect state Stop
+timeContinue 10
+expectPORTB 0x04
+expect state Wait
 checkResult
 
 # Test 7
 test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
 set state = Alarm
+setPINA 0x02
 timeContinue 50
-setPINA 0x00
 expectPORTB 0x02
-expect state Alarm
+expect state Released
 checkResult
 
 
