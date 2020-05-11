@@ -45,7 +45,7 @@ set state = Start
 timeContinue 150
 setPINA 0x00
 expectPORTB 0x02
-expect state Alarm
+expect state Release
 checkResult
 
 # Add tests below
@@ -53,8 +53,8 @@ test "PINA: 0x00 => PORTB: 0x01, state: Run"
 set state = Alarm
 timeContinue 10
 setPINA 0x01
-expectPORTB 0x04
-expect state Wait
+expectPORTB 0x02
+expect state Alarm
 checkResult
 
 # Report on how many tests passed/tests ran
