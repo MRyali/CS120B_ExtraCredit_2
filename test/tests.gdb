@@ -26,7 +26,7 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-# Example test:
+# Test 1
 test "PINA: 0x00 => PORTB: 0x01, state: Run"
 set state = Start
 # Set inputs
@@ -39,23 +39,60 @@ expect state Run
 # Check pass/fail
 checkResult
 
-# Add tests below
-test "PINA: 0x00 => PORTB: 0x01, state: Run"
+# Test 2
+test "PINA: 0x01 => PORTB: 0x02, state: Release"
 set state = Start
 timeContinue 150
-setPINA 0x00
+setPINA 0x01
 expectPORTB 0x02
 expect state Release
 checkResult
 
-# Add tests below
-test "PINA: 0x00 => PORTB: 0x01, state: Run"
+# Test 3
+test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
 set state = Alarm
 timeContinue 10
 setPINA 0x01
 expectPORTB 0x02
 expect state Alarm
 checkResult
+
+# Test 4
+test "PINA: 0x00 => PORTB: 0x02, state: Alarm"
+set state = Wait
+timeContinue 42
+setPINA 0x00
+expectPORTB 0x02
+expect state Alarm
+checkResult
+
+# Test 5
+test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
+set state = Alarm
+timeContinue 10
+setPINA 0x02
+expectPORTB 0x05
+expect state Stop
+checkResult
+
+# Test 6
+test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
+set state = Wait
+timeContinue 10
+setPINA 0x02
+expectPORTB 0x05
+expect state Stop
+checkResult
+
+# Test 7
+test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
+set state = Alarm
+timeContinue 50
+setPINA 0x00
+expectPORTB 0x02
+expect state Alarm
+checkResult
+
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
