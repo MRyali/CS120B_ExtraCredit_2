@@ -89,7 +89,7 @@ test "PINA: 0x01 => PORTB: 0x02, state: Alarm"
 set state = Alarm
 setPINA 0x02
 timeContinue 50
-expectPORTB 0x02
+expectPORTB 0x04
 expect state Release
 checkResult
 
