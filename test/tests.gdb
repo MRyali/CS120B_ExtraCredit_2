@@ -6,7 +6,7 @@
 #       Where <message> is the message to print. Must call this at the beginning of every test
 #       Example: test "PINA: 0x00 => expect PORTC: 0x01"
 #   checkResult
-#       Verify if the test passed or failed. Prints "passed." or "failed." accordingly, 
+#       Verify if the test passed or failed. Prints "passed." or "failed." accordingly,
 #       Must call this at the end of every test.
 #   expectPORTx <val>
 #       With x as the port (A,B,C,D)
@@ -15,9 +15,9 @@
 #       With x as the port or pin (A,B,C,D)
 #       The value to set the pin to (can be decimal or hexidecimal
 #       Example: setPINA 0x01
-#   printPORTx f OR printPINx f 
+#   printPORTx f OR printPINx f
 #       With x as the port or pin (A,B,C,D)
-#       With f as a format option which can be: [d] decimal, [x] hexadecmial (default), [t] binary 
+#       With f as a format option which can be: [d] decimal, [x] hexadecmial (default), [t] binary
 #       Example: printPORTC d
 #   printDDRx
 #       With x as the DDR (A,B,C,D)
@@ -40,9 +40,22 @@ expect state Run
 checkResult
 
 # Add tests below
+test "PINA: 0x00 => PORTB: 0x01, state: Run"
+set state = Start
+timeContinue 150
+setPINA 0x00
+expectPORTB 0x02
+expect state Alarm
+checkResult
 
-
-
+# Add tests below
+test "PINA: 0x00 => PORTB: 0x01, state: Run"
+set state = Alarm
+timeContinue 10
+setPINA 0x01
+expectPORTB 0x04
+expect state Wait
+checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
