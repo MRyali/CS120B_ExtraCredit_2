@@ -63,7 +63,7 @@ set state = Wait
 timeContinue 42
 setPINA 0x00
 expectPORTB 0x04
-expect state Released
+expect state Release
 checkResult
 
 # Test 5
@@ -90,7 +90,7 @@ set state = Alarm
 setPINA 0x02
 timeContinue 50
 expectPORTB 0x02
-expect state Released
+expect state Release
 checkResult
 
 
